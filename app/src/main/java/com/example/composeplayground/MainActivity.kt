@@ -17,7 +17,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.composeplayground.data.initialPosts
 import com.example.composeplayground.data.users
+import com.example.composeplayground.domain.Post
 import com.example.composeplayground.domain.User
 import com.example.composeplayground.ui.theme.ComposePlaygroundTheme
 
@@ -28,11 +30,35 @@ class MainActivity : ComponentActivity() {
             ComposePlaygroundTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    AuthorInfoSection(author = users[0])
+                    PostItem(post = initialPosts[0])
                 }
             }
         }
     }
+}
+
+@Composable
+fun PostItem(
+    post: Post
+) {
+    Column {
+        AuthorInfoSection(author = post.author)
+        PostImage(imageId = post.postImageId)
+    }
+}
+
+@Composable
+fun PostImage(
+    imageId: Int
+) {
+    Image(
+        painter = painterResource(id = imageId),
+        contentDescription = null,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp),
+        contentScale = ContentScale.Crop
+    )
 }
 
 @Composable
@@ -85,6 +111,31 @@ fun RowImageWithText(
             modifier = modifier
                 .padding(8.dp)
         )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun PostItemPreview() {
+    ComposePlaygroundTheme {
+        PostItem(initialPosts.first())
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PostItemBigPreview() {
+    ComposePlaygroundTheme {
+        PostItem(initialPosts[1])
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PostItemDarkPreview() {
+    ComposePlaygroundTheme(darkTheme = true) {
+        PostItem(initialPosts.first())
     }
 }
 
