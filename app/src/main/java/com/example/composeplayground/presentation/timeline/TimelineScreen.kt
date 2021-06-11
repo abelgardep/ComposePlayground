@@ -1,5 +1,7 @@
 package com.example.composeplayground.presentation.timeline
 
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -20,6 +22,10 @@ fun TimelineScreen(
     )
 
     Surface(color = MaterialTheme.colors.background) {
-        PostItem(post = timelineScreenState.listOfPosts.first())
+        LazyColumn {
+            items(timelineScreenState.listOfPosts) { post ->
+                PostItem(post = post)
+            }
+        }
     }
 }
