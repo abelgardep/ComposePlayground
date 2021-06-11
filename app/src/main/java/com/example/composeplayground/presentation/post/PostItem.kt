@@ -3,20 +3,23 @@ package com.example.composeplayground.presentation.post
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.MailOutline
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.composeplayground.R
 import com.example.composeplayground.data.initialPosts
 import com.example.composeplayground.data.users
 import com.example.composeplayground.domain.Post
@@ -31,6 +34,7 @@ fun PostItem(
     Column {
         AuthorInfoSection(author = post.author)
         PostImage(imageId = post.postImageId)
+        IconSection()
     }
 }
 
@@ -70,6 +74,53 @@ fun AuthorInfoSection(
             Icon(
                 imageVector = Icons.Default.MoreVert,
                 contentDescription = null,
+            )
+        }
+    }
+}
+
+/**
+ * We will use the icons available in compose material icons. If we need more,
+ * we could check https://developer.android.com/jetpack/compose/resources#icons
+ * We could add a library with more icons, or add them to the project via drawable,
+ * but since this is just an example, we will keep it simple.
+ */
+@Composable
+fun IconSection() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row {
+            var fav by remember { mutableStateOf(false) }
+            IconToggleButton(checked = fav, onCheckedChange = { fav = it }) {
+                val icon = if (fav) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
+                val tint = if (fav) Color.Red else MaterialTheme.colors.onBackground
+                Icon(
+                    imageVector = icon,
+                    tint = tint,
+                    contentDescription = null
+                )
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Outlined.MailOutline,
+                    tint = MaterialTheme.colors.onBackground,
+                    contentDescription = null
+                )
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Outlined.Share,
+                    tint = MaterialTheme.colors.onBackground,
+                    contentDescription = null
+                )
+            }
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_bookmark_border),
+                contentDescription = null
             )
         }
     }
