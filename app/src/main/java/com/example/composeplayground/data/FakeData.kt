@@ -36,25 +36,25 @@ val initialPosts = listOf(
         likedBy = listOf()
     ),
     Post(
-        id = 1,
+        id = 2,
         postImageId = R.drawable.post2,
         author = users[3],
         likedBy = listOf(users[1], users[2])
     ),
     Post(
-        id = 1,
+        id = 3,
         postImageId = R.drawable.post3,
         author = users[4],
         likedBy = listOf(users[3])
     ),
     Post(
-        id = 1,
+        id = 4,
         postImageId = R.drawable.post4,
         author = users[1],
         likedBy = listOf(users[4])
     ),
     Post(
-        id = 1,
+        id = 5,
         postImageId = R.drawable.post5,
         author = users[0],
         likedBy = listOf()
