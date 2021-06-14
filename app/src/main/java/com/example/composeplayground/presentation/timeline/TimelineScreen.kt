@@ -11,10 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeplayground.R
+import com.example.composeplayground.TEST_TAG_EMPTY_LIST
 import com.example.composeplayground.data.initialPosts
 import com.example.composeplayground.domain.Post
 import com.example.composeplayground.presentation.post.PostItem
@@ -101,7 +103,7 @@ fun CleanAndFillButtons(
 
 @Composable
 fun TimelineEmpty() {
-    Text("Empty list")
+    Text(text = "Empty list", modifier = Modifier.testTag(TEST_TAG_EMPTY_LIST))
 }
 
 @Composable
