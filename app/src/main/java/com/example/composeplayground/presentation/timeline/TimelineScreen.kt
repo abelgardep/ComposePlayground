@@ -16,7 +16,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeplayground.R
+import com.example.composeplayground.TEST_TAG_CLEAN_BUTTON
 import com.example.composeplayground.TEST_TAG_EMPTY_LIST
+import com.example.composeplayground.TEST_TAG_FILL_BUTTON
 import com.example.composeplayground.data.initialPosts
 import com.example.composeplayground.domain.Post
 import com.example.composeplayground.presentation.post.PostItem
@@ -86,6 +88,7 @@ fun CleanAndFillButtons(
     ) {
         Button(
             modifier = Modifier
+                .testTag(TEST_TAG_CLEAN_BUTTON)
                 .padding(16.dp)
                 .weight(1f),
             onClick = { onClickClean() }) {
@@ -93,6 +96,7 @@ fun CleanAndFillButtons(
         }
         Button(
             modifier = Modifier
+                .testTag(TEST_TAG_FILL_BUTTON)
                 .padding(16.dp)
                 .weight(1f),
             onClick = { onClickFill() }) {

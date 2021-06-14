@@ -7,6 +7,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import com.example.composeplayground.data.initialPosts
 import com.example.composeplayground.domain.Post
 import com.example.composeplayground.presentation.timeline.TimelineContent
@@ -26,7 +27,13 @@ class TimelineContentTest {
 
         composeTestRule.setContent {
             ComposePlaygroundTheme {
-                TimelineContent(listOfPosts = viewState, {}, {})
+                TimelineContent(
+                    listOfPosts = viewState,
+                    onClickFill = {
+                        viewState = listOf(initialPosts.first())
+                    }, onClickClean = {
+                        viewState = listOf()
+                    })
             }
         }
 
@@ -35,10 +42,21 @@ class TimelineContentTest {
             .assertIsDisplayed()
             .assertTextEquals("Empty list")
 
-        viewState = listOf(initialPosts.first())
+        composeTestRule
+            .onNodeWithTag(TEST_TAG_FILL_BUTTON)
+            .performClick()
 
         composeTestRule
             .onNodeWithTag(TEST_TAG_EMPTY_LIST)
             .assertDoesNotExist()
+
+        composeTestRule
+            .onNodeWithTag(TEST_TAG_CLEAN_BUTTON)
+            .performClick()
+
+        composeTestRule
+            .onNodeWithTag(TEST_TAG_EMPTY_LIST)
+            .assertIsDisplayed()
+            .assertTextEquals("Empty list")
     }
 }
