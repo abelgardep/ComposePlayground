@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -35,7 +36,14 @@ fun TimelineScreen(
                 navigationIcon = null,
                 actions = { Icon(imageVector = (Icons.Default.Search), contentDescription = null) }
             )
-        }
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = { /* TODO */ },
+                text = { Text("Add a new post") },
+                icon = { Icon(imageVector = Icons.Outlined.Add, contentDescription = null) })
+        },
+        floatingActionButtonPosition = FabPosition.End
     ) {
         TimelineContent(
             listOfPosts = timelineScreenState.listOfPosts,
