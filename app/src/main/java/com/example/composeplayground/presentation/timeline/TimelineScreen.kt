@@ -29,31 +29,42 @@ fun TimelineScreen(
 
     Surface(color = MaterialTheme.colors.background) {
         Column {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Button(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .weight(1f),
-                    onClick = { timelineViewModel.cleanPosts() }) {
-                    Text(text = "Clean")
-                }
-                Button(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .weight(1f),
-                    onClick = { timelineViewModel.fillPosts() }) {
-                    Text(text = "Fill")
-                }
-            }
+            CleanAndFillButtons(
+                onClickClean = { timelineViewModel.cleanPosts() },
+                onClickFill = { timelineViewModel.fillPosts() }
+            )
 
             if (timelineScreenState.listOfPosts.isEmpty()) {
                 TimelineEmpty()
             } else {
                 TimelineList(listOfPosts = timelineScreenState.listOfPosts)
             }
+        }
+    }
+}
+
+@Composable
+fun CleanAndFillButtons(
+    onClickFill: () -> Unit,
+    onClickClean: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Button(
+            modifier = Modifier
+                .padding(16.dp)
+                .weight(1f),
+            onClick = { onClickClean() }) {
+            Text(text = "Clean")
+        }
+        Button(
+            modifier = Modifier
+                .padding(16.dp)
+                .weight(1f),
+            onClick = { onClickFill() }) {
+            Text(text = "Fill")
         }
     }
 }
