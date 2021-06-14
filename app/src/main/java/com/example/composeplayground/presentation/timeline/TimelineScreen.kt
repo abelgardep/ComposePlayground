@@ -3,15 +3,17 @@ package com.example.composeplayground.presentation.timeline
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.composeplayground.R
 import com.example.composeplayground.data.initialPosts
 import com.example.composeplayground.domain.Post
 import com.example.composeplayground.presentation.post.PostItem
@@ -26,7 +28,15 @@ fun TimelineScreen(
         initial = TimelineScreenState(listOf(initialPosts.first()))
     )
 
-    Scaffold {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Row { Text(stringResource(id = R.string.app_name)) } },
+                navigationIcon = null,
+                actions = { Icon(imageVector = (Icons.Default.Search), contentDescription = null) }
+            )
+        }
+    ) {
         TimelineContent(
             listOfPosts = timelineScreenState.listOfPosts,
             onClickFill = { timelineViewModel.fillPosts() },
