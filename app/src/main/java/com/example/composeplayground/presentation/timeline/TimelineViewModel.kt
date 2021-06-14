@@ -16,6 +16,13 @@ class TimelineViewModel : ViewModel() {
         _timeLineScreenState.postValue(TimelineScreenState(initialPosts))
     }
 
+    fun fillPosts() {
+        _timeLineScreenState.postValue(TimelineScreenState(initialPosts))
+    }
+
+    fun cleanPosts() {
+        _timeLineScreenState.postValue(TimelineScreenState(listOf()))
+    }
 }
 
 @Immutable
