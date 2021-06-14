@@ -4,8 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,18 +26,31 @@ fun TimelineScreen(
         initial = TimelineScreenState(listOf(initialPosts.first()))
     )
 
-    Surface(color = MaterialTheme.colors.background) {
-        Column {
-            CleanAndFillButtons(
-                onClickClean = { timelineViewModel.cleanPosts() },
-                onClickFill = { timelineViewModel.fillPosts() }
-            )
+    Scaffold {
+        TimelineContent(
+            listOfPosts = timelineScreenState.listOfPosts,
+            onClickFill = { timelineViewModel.fillPosts() },
+            onClickClean = { timelineViewModel.cleanPosts() }
+        )
+    }
+}
 
-            if (timelineScreenState.listOfPosts.isEmpty()) {
-                TimelineEmpty()
-            } else {
-                TimelineList(listOfPosts = timelineScreenState.listOfPosts)
-            }
+@Composable
+fun TimelineContent(
+    listOfPosts: List<Post>,
+    onClickFill: () -> Unit,
+    onClickClean: () -> Unit
+) {
+    Column {
+        CleanAndFillButtons(
+            onClickClean = { onClickClean() },
+            onClickFill = { onClickFill() }
+        )
+
+        if (listOfPosts.isEmpty()) {
+            TimelineEmpty()
+        } else {
+            TimelineList(listOfPosts = listOfPosts)
         }
     }
 }
