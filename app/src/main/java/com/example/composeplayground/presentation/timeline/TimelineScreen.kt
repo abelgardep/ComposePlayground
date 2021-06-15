@@ -38,7 +38,14 @@ fun TimelineScreen(
             TopAppBar(
                 title = { Row { Text(stringResource(id = R.string.app_name)) } },
                 navigationIcon = null,
-                actions = { Icon(imageVector = (Icons.Default.Search), contentDescription = null) }
+                actions = {
+                    IconButton(
+                        onClick = {},
+                        content = {
+                            Icon(imageVector = (Icons.Default.Search), contentDescription = null)
+                        }
+                    )
+                }
             )
         },
         floatingActionButton = {
